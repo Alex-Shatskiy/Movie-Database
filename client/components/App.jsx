@@ -28,9 +28,9 @@ export class App extends React.Component {
         <SearchBar />
 
         <div>
-          {this.props.movies.results.map((movie) => {
-            return (
-              <ul>
+          <ul>
+            {this.props.movies.results.map((movie) => {
+              return (
                 <MovieCard
                   title={movie.title}
                   releaseDate={movie.release_date}
@@ -38,9 +38,9 @@ export class App extends React.Component {
                   rating={movie.vote_average}
                   imgUrl={movie.poster_path}
                 />
-              </ul>
-            );
-          })}
+              );
+            })}
+          </ul>
         </div>
       </>
     );

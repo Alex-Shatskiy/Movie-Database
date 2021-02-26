@@ -2,12 +2,14 @@ import React from "react";
 import { connect } from "react-redux";
 
 function MovieCard(props) {
-  console.log(props.imgUrl);
   return (
     <>
-      <li>
+      <li className="movieCard">
         <h3>{props.title}</h3>
-        <img src={`https://image.tmdb.org/t/p/w200${props.imgUrl}`} />
+        <img
+          className="moviePhoto"
+          src={`https://image.tmdb.org/t/p/original${props.imgUrl}`}
+        />
         <p>Date: {props.releaseDate}</p>
         Summary:<p>{props.summary}</p>
         <p>Rating: {props.rating}/10</p>
