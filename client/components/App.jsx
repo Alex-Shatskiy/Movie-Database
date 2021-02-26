@@ -2,6 +2,7 @@ import React from "react";
 import { connect } from "react-redux";
 
 import SearchBar from "./SearchBar";
+import MovieCard from "./MovieCard";
 
 export class App extends React.Component {
   state = {};
@@ -28,7 +29,17 @@ export class App extends React.Component {
 
         <div>
           {this.props.movies.results.map((movie) => {
-            return <p>{movie.title}</p>;
+            return (
+              <ul>
+                <MovieCard
+                  title={movie.title}
+                  releaseDate={movie.release_date}
+                  summary={movie.overview}
+                  rating={movie.vote_average}
+                  imgUrl={movie.poster_path}
+                />
+              </ul>
+            );
           })}
         </div>
       </>
