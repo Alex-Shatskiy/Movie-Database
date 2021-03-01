@@ -1,12 +1,13 @@
 import React from "react";
 import { connect } from "react-redux";
-import { Link } from "react-router-dom";
+import { Link, Redirect } from "react-router-dom";
 
 import { getMovies } from "../actions/index";
 
 export class SearchBar extends React.Component {
   state = {
     search: "",
+    redirect: false,
   };
 
   handleChange = (event) => {
@@ -17,16 +18,22 @@ export class SearchBar extends React.Component {
 
   submit = () => {
     this.props.dispatch(getMovies(this.state.search));
-    this.setState({ search: "" });
+    this.setState({ redirect: true });
   };
 
   handleSubmit = (e) => {
     e.preventDefault();
     e.target.reset();
+
     this.submit();
   };
 
   render() {
+    const redirect = this.state.redirect;
+    if (redirect) {
+      this.setState({ redirect: false });
+      return <Redirect to={`/search/${this.state.search}`} />;
+    }
     return (
       <div className="searchBar">
         <form onSubmit={this.handleSubmit} className="search-form">
@@ -36,11 +43,9 @@ export class SearchBar extends React.Component {
             placeholder="Search"
             type="text"
           />
-          <Link to={`${this.state.search}`}>
-            <button className="search-button" type="submit">
-              Search
-            </button>
-          </Link>
+          <button className="search-button" type="submit">
+            Search
+          </button>
         </form>
       </div>
     );

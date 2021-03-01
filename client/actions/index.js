@@ -34,6 +34,7 @@ export const setGenreMovies = (movies) => {
 };
 
 export const getMovies = (search) => {
+  console.log("hit");
   return (dispatch) => {
     movieSearch(search)
       .then((movies) => {
@@ -70,7 +71,6 @@ export const getAllPopularMovies = () => {
 };
 
 export const fetchGenreMovies = (genreId) => {
-  console.log("j");
   return (dispatch) => {
     getGenreMovies(genreId)
       .then((movies) => {

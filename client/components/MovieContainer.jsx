@@ -1,17 +1,15 @@
 import React from "react";
 import MovieCard from "./MovieCard";
 import { connect } from "react-redux";
-import { getAllPopularMovies } from "../actions";
+import { getMovies } from "../actions";
+import { useParams } from "react-router-dom";
 
 function MovieContainer(props) {
-  const loadMovie = () => {
-    let urlStatus = props.match.params.status;
-    if (urlStatus == "popular") {
-      return props.dispatch(getAllPopularMovies());
-    }
-  };
+  // let pageUrl = props.match.params;
+  // if (pageUrl.result) {
+  //   props.dispatch(getMovies(pageUrl.result));
+  // }
 
-  loadMovie();
   return (
     <>
       <ul className="movie-container">

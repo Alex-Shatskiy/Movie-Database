@@ -20,6 +20,7 @@ export class App extends React.Component {
           <SearchBar />
           <Switch>
             <Route exact path="/" component={MovieContainer} />
+            <Route path="/search/:result" component={MovieContainer} />
             <Route path="/:status" component={MovieContainer} />
           </Switch>
         </Router>
