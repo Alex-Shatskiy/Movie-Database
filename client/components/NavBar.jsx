@@ -1,12 +1,16 @@
 import React, { useState } from "react";
+import { connect } from "react-redux";
+
 import { Link } from "react-router-dom";
 import * as FaIcons from "react-icons/fa";
 import * as AiIcons from "react-icons/ai";
-import { SidebarData } from "./SidebarData";
 import { IconContext } from "react-icons";
+
+import { fetchGenreMovies } from "../actions";
 
 function NavBar(props) {
   const [sidebar, setSidebar] = useState(false);
+  const [open, setOpen] = useState(false);
 
   const showSidebar = () => setSidebar(!sidebar);
 
@@ -14,9 +18,10 @@ function NavBar(props) {
     <>
       <IconContext.Provider value={{ color: "#fff" }}>
         <div className="navBar">
-          <Link to="#" className="menu-bars">
+          <img src="https://www.graphicsprings.com/filestorage/stencils/30be204cf77d680e2c52b2abb6794503.png?width=50&height=50" />
+          <div to="#" className="menu-bars">
             <FaIcons.FaBars onClick={showSidebar} />
-          </Link>
+          </div>
         </div>
         <nav className={sidebar ? "nav-menu active" : "nav-menu"}>
           <ul className="nav-menu-items" onClick={showSidebar}>
@@ -25,11 +30,21 @@ function NavBar(props) {
                 <AiIcons.AiOutlineClose />
               </Link>
             </li>
-            {SidebarData.map((item, i) => {
+            <li className="subMenu">Discover:</li>
+            <li className="nav-text">
+              <Link exact to="/popular">
+                Popular
+              </Link>
+            </li>
+            <li className="subMenu">Genres:</li>
+            {props.genre.genres.map((item, i) => {
               return (
-                <li key={i} className={item.cName}>
-                  <Link to={item.path}>
-                    <span>{item.title}</span>
+                <li key={i} className="nav-text">
+                  <Link
+                    to={item.name}
+                    onClick={() => props.dispatch(fetchGenreMovies(item.id))}
+                  >
+                    <span>{item.name}</span>
                   </Link>
                 </li>
               );
@@ -41,8 +56,10 @@ function NavBar(props) {
   );
 }
 
-export default NavBar;
-
-{
-  /* <img src="https://www.graphicsprings.com/filestorage/stencils/30be204cf77d680e2c52b2abb6794503.png?width=50&height=50" /> */
+function mapPropsToState(store) {
+  return {
+    genre: store.genre,
+  };
 }
+
+export default connect(mapPropsToState)(NavBar);

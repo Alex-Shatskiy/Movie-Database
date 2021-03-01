@@ -1,39 +1,29 @@
 import React from "react";
 import { connect } from "react-redux";
 
+import { getAllGenres } from "../actions/index";
+
 import SearchBar from "./SearchBar";
-import MovieCard from "./MovieCard";
 import NavBar from "./NavBar";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+import MovieContainer from "./MovieContainer";
 
 export class App extends React.Component {
-  state = {};
-
+  componentDidMount() {
+    this.props.dispatch(getAllGenres());
+  }
   render() {
     return (
       <>
         <Router>
           <NavBar />
+          <SearchBar />
           <Switch>
-            <Route path="/" />
+            <Route exact path="/" component={MovieContainer} />
+            <Route path="/:status" component={MovieContainer} />
           </Switch>
         </Router>
-        <SearchBar />
-        <div>
-          <ul className="movie-container">
-            {this.props.movies.results.map((movie) => {
-              return (
-                <MovieCard
-                  title={movie.title}
-                  releaseDate={movie.release_date}
-                  summary={movie.overview}
-                  rating={movie.vote_average}
-                  imgUrl={movie.poster_path}
-                />
-              );
-            })}
-          </ul>
-        </div>
+        <div></div>
       </>
     );
   }

@@ -1,5 +1,6 @@
 import React from "react";
 import { connect } from "react-redux";
+import { Link } from "react-router-dom";
 
 import { getMovies } from "../actions/index";
 
@@ -35,9 +36,11 @@ export class SearchBar extends React.Component {
             placeholder="Search"
             type="text"
           />
-          <button className="search-button" type="submit">
-            Search
-          </button>
+          <Link to={`${this.state.search}`}>
+            <button className="search-button" type="submit">
+              Search
+            </button>
+          </Link>
         </form>
       </div>
     );
