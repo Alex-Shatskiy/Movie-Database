@@ -6,7 +6,7 @@ import {
   getTopRatedMovies,
 } from "../apis/movies";
 
-export const searchMovie = (search) => {
+export const setMovie = (search) => {
   return {
     type: "GET_MOVIE",
     movie: search,
@@ -20,25 +20,11 @@ export const getGenres = (genres) => {
   };
 };
 
-export const setPopularMovies = (movies) => {
-  return {
-    type: "SET_MOVIES",
-    movie: movies,
-  };
-};
-
-export const setGenreMovies = (movies) => {
-  return {
-    type: "SET_GENRE_MOVIES",
-    movie: movies,
-  };
-};
-
 export const getMovies = (search) => {
   return (dispatch) => {
     movieSearch(search)
       .then((movies) => {
-        return dispatch(searchMovie(movies));
+        return dispatch(setMovie(movies));
       })
       .catch((err) => {
         console.log(err);
@@ -62,7 +48,7 @@ export const getAllPopularMovies = () => {
   return (dispatch) => {
     getPopularMovies()
       .then((movies) => {
-        return dispatch(setPopularMovies(movies));
+        return dispatch(setMovie(movies));
       })
       .catch((err) => {
         console.log(err);
@@ -74,7 +60,7 @@ export const fetchGenreMovies = (genreId) => {
   return (dispatch) => {
     getGenreMovies(genreId)
       .then((movies) => {
-        return dispatch(setGenreMovies(movies));
+        return dispatch(setMovie(movies));
       })
       .catch((err) => {
         console.log(err);
@@ -86,7 +72,7 @@ export const fetchTopRatedMovies = () => {
   return (dispatch) => {
     getTopRatedMovies()
       .then((movies) => {
-        return dispatch(setPopularMovies(movies));
+        return dispatch(setMovie(movies));
       })
       .catch((err) => {
         console.log(err);
