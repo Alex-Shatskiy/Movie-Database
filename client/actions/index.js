@@ -3,6 +3,7 @@ import {
   getGenre,
   getPopularMovies,
   getGenreMovies,
+  getTopRatedMovies,
 } from "../apis/movies";
 
 export const searchMovie = (search) => {
@@ -34,7 +35,6 @@ export const setGenreMovies = (movies) => {
 };
 
 export const getMovies = (search) => {
-  console.log("hit");
   return (dispatch) => {
     movieSearch(search)
       .then((movies) => {
@@ -75,6 +75,18 @@ export const fetchGenreMovies = (genreId) => {
     getGenreMovies(genreId)
       .then((movies) => {
         return dispatch(setGenreMovies(movies));
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+};
+
+export const fetchTopRatedMovies = () => {
+  return (dispatch) => {
+    getTopRatedMovies()
+      .then((movies) => {
+        return dispatch(setPopularMovies(movies));
       })
       .catch((err) => {
         console.log(err);

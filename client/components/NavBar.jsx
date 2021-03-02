@@ -6,11 +6,14 @@ import * as FaIcons from "react-icons/fa";
 import * as AiIcons from "react-icons/ai";
 import { IconContext } from "react-icons";
 
-import { fetchGenreMovies, getAllPopularMovies } from "../actions";
+import {
+  fetchGenreMovies,
+  getAllPopularMovies,
+  fetchTopRatedMovies,
+} from "../actions";
 
 function NavBar(props) {
   const [sidebar, setSidebar] = useState(false);
-  const [open, setOpen] = useState(false);
 
   const showSidebar = () => setSidebar(!sidebar);
 
@@ -34,10 +37,19 @@ function NavBar(props) {
             <li className="nav-text">
               <Link
                 exact
-                to="/popular"
+                to="/discover/popular"
                 onClick={() => props.dispatch(getAllPopularMovies())}
               >
                 Popular
+              </Link>
+            </li>
+            <li className="nav-text">
+              <Link
+                exact
+                to="/discover/top-rated"
+                onClick={() => props.dispatch(fetchTopRatedMovies())}
+              >
+                Top Rated
               </Link>
             </li>
             <li className="subMenu">Genres:</li>
@@ -45,7 +57,7 @@ function NavBar(props) {
               return (
                 <li key={i} className="nav-text">
                   <Link
-                    to={item.name}
+                    to={`/genre/${item.name}`}
                     onClick={() => props.dispatch(fetchGenreMovies(item.id))}
                   >
                     <span>{item.name}</span>

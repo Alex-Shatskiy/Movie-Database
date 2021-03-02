@@ -1,15 +1,8 @@
 import React from "react";
 import MovieCard from "./MovieCard";
 import { connect } from "react-redux";
-import { getMovies } from "../actions";
-import { useParams } from "react-router-dom";
 
 function MovieContainer(props) {
-  // let pageUrl = props.match.params;
-  // if (pageUrl.result) {
-  //   props.dispatch(getMovies(pageUrl.result));
-  // }
-
   return (
     <>
       <ul className="movie-container">
@@ -25,6 +18,7 @@ function MovieContainer(props) {
           );
         })}
       </ul>
+      <button></button>
     </>
   );
 }

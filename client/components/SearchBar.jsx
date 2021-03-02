@@ -34,6 +34,7 @@ export class SearchBar extends React.Component {
       this.setState({ redirect: false });
       return <Redirect to={`/search/${this.state.search}`} />;
     }
+
     return (
       <div className="searchBar">
         <form onSubmit={this.handleSubmit} className="search-form">

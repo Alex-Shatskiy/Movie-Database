@@ -21,7 +21,8 @@ export class App extends React.Component {
           <Switch>
             <Route exact path="/" component={MovieContainer} />
             <Route path="/search/:result" component={MovieContainer} />
-            <Route path="/:status" component={MovieContainer} />
+            <Route path="/discover/:status" component={MovieContainer} />
+            <Route path="/genre/:status" component={MovieContainer} />
           </Switch>
         </Router>
         <div></div>
