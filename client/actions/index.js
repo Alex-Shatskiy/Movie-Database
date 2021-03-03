@@ -20,9 +20,9 @@ export const getGenres = (genres) => {
   };
 };
 
-export const getMovies = (search) => {
+export const getMovies = (search, page) => {
   return (dispatch) => {
-    movieSearch(search)
+    movieSearch(search, page)
       .then((movies) => {
         return dispatch(setMovie(movies));
       })
@@ -44,9 +44,9 @@ export const getAllGenres = () => {
   };
 };
 
-export const getAllPopularMovies = () => {
+export const getAllPopularMovies = (page) => {
   return (dispatch) => {
-    getPopularMovies()
+    getPopularMovies(page)
       .then((movies) => {
         return dispatch(setMovie(movies));
       })
@@ -56,9 +56,10 @@ export const getAllPopularMovies = () => {
   };
 };
 
-export const fetchGenreMovies = (genreId) => {
+export const fetchGenreMovies = (genreId, page) => {
   return (dispatch) => {
-    getGenreMovies(genreId)
+    console.log(genreId);
+    getGenreMovies(genreId, page)
       .then((movies) => {
         return dispatch(setMovie(movies));
       })
@@ -68,9 +69,9 @@ export const fetchGenreMovies = (genreId) => {
   };
 };
 
-export const fetchTopRatedMovies = () => {
+export const fetchTopRatedMovies = (page) => {
   return (dispatch) => {
-    getTopRatedMovies()
+    getTopRatedMovies(page)
       .then((movies) => {
         return dispatch(setMovie(movies));
       })
