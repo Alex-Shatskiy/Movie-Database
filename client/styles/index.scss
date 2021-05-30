@@ -3,7 +3,14 @@
 html,
 body {
   font-family: "Montserrat", sans-serif;
-  background-image: linear-gradient(to top, #dfe9f3 0%, white 100%);
+  // background-image: linear-gradient(to top, #dfe9f3 0%, white 100%);
+  background: rgb(38, 32, 71);
+  background: linear-gradient(
+    90deg,
+    rgba(38, 32, 71, 1) 0%,
+    rgba(96, 76, 126, 1) 35%,
+    rgba(60, 0, 164, 1) 100%
+  );
   background-repeat: no-repeat;
   background-size: cover;
   min-height: 100vh;
@@ -140,21 +147,40 @@ span {
 .movieCard {
   border-radius: 10px;
   box-shadow: 0px, 5px, 20px rgb(71, 71, 71);
-  margin: 20px;
   display: flex;
   flex-direction: column;
   justify-content: space-around;
-  background: white;
   align-items: center;
-  min-width: 40%;
+  min-width: 24%;
   width: 20vw;
-  border: solid;
+  // border: solid;
+  padding-left: 0px;
 }
 .movie-container {
   display: flex;
   justify-content: space-around;
   flex-wrap: wrap;
+  align-items: stretch;
 }
 .moviePhoto {
-  width: 50%;
+  width: 70%;
+}
+.movieCard:hover {
+  background-position: right center; /* change the direction of the change here */
+  background-color: rgb(99, 97, 170, 0.5);
+  color: #fff;
+  text-decoration: none;
+}
+.movieDetails {
+  height: 0px;
+  padding-bottom: 25px;
+}
+.movieTitle {
+  display: inherit;
+  text-align: center;
+  align-items: center;
+  font-weight: 900;
+  margin-bottom: 5px;
+  height: 0;
+  margin-top: 25px;
 }

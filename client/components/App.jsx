@@ -1,16 +1,16 @@
-import React from "react";
-import { connect } from "react-redux";
+import React from "react"
+import { connect } from "react-redux"
 
-import { getAllGenres } from "../actions/index";
+import { getAllGenres } from "../actions/index"
 
-import SearchBar from "./SearchBar";
-import NavBar from "./NavBar";
-import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
-import MovieContainer from "./MovieContainer";
+import SearchBar from "./SearchBar"
+import NavBar from "./NavBar"
+import { BrowserRouter as Router, Switch, Route } from "react-router-dom"
+import MovieContainer from "./MovieContainer"
 
 export class App extends React.Component {
   componentDidMount() {
-    this.props.dispatch(getAllGenres());
+    this.props.dispatch(getAllGenres())
   }
   render() {
     return (
@@ -23,17 +23,18 @@ export class App extends React.Component {
             <Route path="/search/:result" component={MovieContainer} />
             <Route path="/discover/:status" component={MovieContainer} />
             <Route path="/genre/:status" component={MovieContainer} />
+            <Route path="/:status/:page" component={MovieContainer} />
           </Switch>
         </Router>
         <div></div>
       </>
-    );
+    )
   }
 }
 
 function mapPropsToState(store) {
   return {
     movies: store.movie,
-  };
+  }
 }
-export default connect(mapPropsToState)(App);
+export default connect(mapPropsToState)(App)
