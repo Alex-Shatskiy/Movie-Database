@@ -1,42 +1,68 @@
-import request from "superagent";
+import request from "superagent"
 
-const API_KEY = "4cc1b68a07fe5ba265950e85ac96cb2c";
-const MOVIE_URL = `https://api.themoviedb.org/3/`;
-const GENRE_URL = `https://api.themoviedb.org/3/genre/movie/list?api_key=${API_KEY}`;
-const POPULAR_URL = `https://api.themoviedb.org/3/movie/popular?api_key=${API_KEY}&language=en-US`;
-const GET_BY_GENRE = `https://api.themoviedb.org/3/discover/movie?api_key=${API_KEY}&language=en-US&with_genres=`;
-const TOP_RATED_URL = `https://api.themoviedb.org/3/movie/top_rated?api_key=${API_KEY}&language=en-US`;
+const API_KEY = "4cc1b68a07fe5ba265950e85ac96cb2c"
+const BASE_URL = `https://api.themoviedb.org/3`
 
 export function movieSearch(search, page) {
-  let pageNumber = page + 1;
-  console.log(pageNumber);
-  return request
-    .get(MOVIE_URL + `search/movie?&page=2&api_key=${API_KEY}&query=` + search)
-    .then((res) => {
-      return res.body;
-    });
+  let movieSearch =
+    BASE_URL + `/search/movie?api_key=${API_KEY}&query=` + search
+  if (page) {
+    return request.get(movieSearch + `&page=${page}`).then((res) => {
+      return res.body
+    })
+  } else {
+    return request.get(movieSearch).then((res) => {
+      return res.body
+    })
+  }
 }
 
 export function getGenre() {
-  return request.get(GENRE_URL).then((res) => {
-    return res.body;
-  });
+  let genreUrl = BASE_URL + `/genre/movie/list?api_key=${API_KEY}`
+  return request.get(genreUrl).then((res) => {
+    return res.body
+  })
 }
 
-export function getPopularMovies() {
-  return request.get(POPULAR_URL).then((res) => {
-    return res.body;
-  });
+export function getPopularMovies(page) {
+  let popularUrl = BASE_URL + `/movie/popular?api_key=${API_KEY}&language=en-US`
+  console.log(page)
+  if (page) {
+    console.log("hit")
+    return request.get(popularUrl + `&page=${page}`).then((res) => {
+      return res.body
+    })
+  } else {
+    return request.get(popularUrl).then((res) => {
+      return res.body
+    })
+  }
 }
 
-export function getTopRatedMovies() {
-  return request.get(TOP_RATED_URL).then((res) => {
-    return res.body;
-  });
+export function getTopRatedMovies(page) {
+  let topRatedUrl =
+    BASE_URL + `/movie/top_rated?api_key=${API_KEY}&language=en-US`
+
+  if (page) {
+    return request.get(topRatedUrl + `&page=${page}`).then((res) => {
+      return res.body
+    })
+  }
+  return request.get(topRatedUrl).then((res) => {
+    return res.body
+  })
 }
 
-export function getGenreMovies(genre) {
-  return request.get(GET_BY_GENRE + genre).then((res) => {
-    return res.body;
-  });
+export function getGenreMovies(genre, page) {
+  let genreUrl =
+    BASE_URL + `/discover/movie?api_key=${API_KEY}&language=en-US&with_genres=`
+
+  if (page) {
+    return request.get(genreUrl + genre + `&page=${page}`).then((res) => {
+      return res.body
+    })
+  }
+  return request.get(genreUrl + genre).then((res) => {
+    return res.body
+  })
 }
